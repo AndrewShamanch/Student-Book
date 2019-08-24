@@ -1,6 +1,6 @@
 FROM node:latest
 
-MAINTAINER macnaer
+MAINTAINER AndrewShamanch
 
 
 COPY  . /var/www
