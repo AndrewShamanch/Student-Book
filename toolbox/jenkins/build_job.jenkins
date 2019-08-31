@@ -1,5 +1,5 @@
 #!groovy
-// Test groovy
+//  groovy Jenkinsfile
 properties([disableConcurrentBuilds()])
 
 pipeline  {
@@ -15,7 +15,7 @@ pipeline  {
             steps {
                 echo 'Creating docker image ...'
                 dir('.'){
-                    sh "docker build -t shamanas/students-book . "                    
+                    sh "docker build -t macnaer/students-book . "
                 }
             }
         }
@@ -33,7 +33,15 @@ pipeline  {
             steps {
                 echo " ============== pushing image =================="
                 sh '''
-                docker push shamanas/students-book:latest
+                docker push macnaer/students-book:latest
+                '''
+            }
+        }
+        stage("Deploy to test server") {
+            steps {
+                echo " ============== Running playbook =================="
+                sh '''
+                ansible-playbook toolbox/ansible/playbooks/demloyToStageServer.yml
                 '''
             }
         }
